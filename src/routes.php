@@ -1,12 +1,15 @@
 <?php
 
 use Slim\Routing\RouteCollectorProxy;
+use App\Actions\Add;
+use App\Actions\Read;
 
-/** @var \Slim\App $app */
+
 
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
 
 $app->group('/api/v1', function(RouteCollectorProxy $group) {
-    // add routes here.
+    $group->post('/products', Add::class);
+    $group->get('/products/{productId}', Read::class);
 });
