@@ -1,8 +1,18 @@
 <?php
 
+use App\Exceptions\DefinitionException;
+use MMSM\Lib\AuthorizationMiddleware;
+use MMSM\Lib\Validators\JWKValidator;
+use MMSM\Lib\Validators\JWTValidator;
+use Psr\Container\ContainerInterface;
 use function DI\env;
 
 return [
+    'environment' => env('ENV', 'development'),
+    'auth.jwk_uri' => env('JWK_URI', false),
+    'auth.allowedBearers' => [
+        'Bearer'
+    ],
     'database.connection.url' => env('DB_URI'),
     'database.entity.paths' => [
         __DIR__ . '/app/Database/Entities/',
@@ -26,5 +36,23 @@ return [
         'check_database_platform' => true,
         'organize_migrations' => 'none',
     ],
-    //add definitions here.
+    AuthorizationMiddleware::class => function(
+        JWKValidator $JWKValidator,
+        JWTValidator $JWTValidator,
+        ContainerInterface $container
+    ) : AuthorizationMiddleware {
+        $authMiddleware = new AuthorizationMiddleware($JWKValidator, $JWTValidator);
+        if (stristr($container->get('environment'), 'prod') !== false) {
+            $authMiddleware->loadJWKs('/keys/auth0_jwks.json');
+        } else {
+            if (!is_string($container->get('auth.jwk_uri'))) {
+                throw new DefinitionException('invalid type gotten from "auth.jwk_uri".');
+            }
+            $authMiddleware->loadJWKs($container->get('auth.jwk_uri'), false);
+        }
+        foreach ($container->get('auth.allowedBearers') as $bearer) {
+            $authMiddleware->addAllowedBearer($bearer);
+        }
+        return $authMiddleware;
+    },
 ];

@@ -21,6 +21,7 @@ services:
             - postgres
         environment:
             DB_URI: pgsql://phpuser:phppassword@postgres:5432/postgres-dev
+            JWK_URI: https://mmsm.eu.auth0.com/.well-known/jwks.json
     postgres:
         image: postgres
         restart: unless-stopped

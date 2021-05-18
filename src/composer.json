@@ -7,7 +7,8 @@
         "doctrine/orm": "^2.8",
         "doctrine/migrations": "^3.1",
         "php-di/slim-bridge": "^3.1",
-        "ramsey/uuid": "^4.1"
+        "ramsey/uuid": "^4.1",
+        "mmsm/service-lib": "^1.0"
     },
     "autoload": {
         "psr-4": {
@@ -16,5 +17,11 @@
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9"
-    }
+    },
+    "repositories": [
+        {
+            "type": "github",
+            "url": "https://github.com/mmsm2021/service-lib.git"
+        }
+    ]
 }
