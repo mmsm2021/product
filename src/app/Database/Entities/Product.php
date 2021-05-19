@@ -5,8 +5,16 @@ namespace App\Database\Entities;
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
 use Respect\Validation\Validator as v;
+use App\Database\EntityInterface;
+use App\Database\Repositories\ProductRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Selectable;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 
-class Product
+class Product implements EntityInterface
 {
     public const PROPERTY_NAME = 'name';
     public const PROPERTY_LOCATION_ID = 'locationId';
@@ -376,5 +384,82 @@ class Product
         $entity->setDescription($product[static::PROPERTY_DESCRIPTION]);
         $entity->setUniqueIdentifier($product[static::PROPERTY_UNIQUE_IDENTIFIER]);
         return $entity;
+    }
+
+    public static function loadMetadata(ClassMetadata $metadata)
+    {
+        $builder = new ClassMetadataBuilder($metadata);
+
+        $builder->setTable(ProductRepository::TABLE_NAME);
+        $builder->setCustomRepositoryClass(ProductRepository::class);
+
+        $builder->createField('id', Types::STRING)
+            ->makePrimaryKey()
+            ->nullable(false)
+            ->length(40)
+            ->build();
+
+        $builder->createField('name', Types::STRING)
+            ->nullable(false)
+            ->length(200)
+            ->build();
+
+        $builder->createField('locationId', Types::STRING)
+            ->nullable(false)
+            ->length(40)
+            ->columnName('location_id')
+            ->build();
+
+        $builder->createField('price', Types::STRING)
+            ->nullable(true)
+            ->build();
+
+        $builder->createField('discountPrice', Types::STRING)
+            ->columnName('discount_price')
+            ->nullable(true)
+            ->build();
+        
+        $builder->createField('discountFrom', Types::DATETIMETZ_IMMUTABLE)
+            ->nullable(true)
+            ->columnName('discount_from')
+            ->build();
+
+        $builder->createField('discountTo', Types::DATETIMETZ_IMMUTABLE)
+            ->nullable(true)
+            ->columnName('discount_to')
+            ->build();
+
+        $builder->createField('status', Types::BOOLEAN)
+            ->nullable(false)
+            ->build();
+
+        $builder->createField('attributes', Types::JSON)
+            ->nullable(true)
+            ->build();
+
+        $builder->createField('description', Types::TEXT)
+            ->nullable(true)
+            ->build();
+
+
+        $builder->createField('createdAt', Types::DATETIMETZ_IMMUTABLE)
+            ->nullable(false)
+            ->columnName('created_at')
+            ->build();
+
+        $builder->createField('updatedAt', Types::DATETIMETZ_IMMUTABLE)
+            ->nullable(true)
+            ->columnName('updated_at')
+            ->build();
+
+        $builder->createField('deletedAt', Types::DATETIMETZ_IMMUTABLE)
+            ->nullable(true)
+            ->columnName('deleted_at')
+            ->build();
+
+        $builder->createField('uniqueIdentifier', Types::STRING)
+            ->nullable(false)
+            ->columnName('unique_identifier')
+            ->build();
     }
 }

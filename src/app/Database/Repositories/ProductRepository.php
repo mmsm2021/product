@@ -6,6 +6,7 @@ use Doctrine\ORM\EntityManager;
 
 class ProductRepository{
 
+    public const TABLE_NAME = 'products';
 
     private EntityManager $entityManager;
 
@@ -21,7 +22,5 @@ class ProductRepository{
         return $query->getResult();
     }
 }
-
-
 
 ?>
