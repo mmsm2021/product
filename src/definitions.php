@@ -5,6 +5,10 @@ use MMSM\Lib\AuthorizationMiddleware;
 use MMSM\Lib\Validators\JWKValidator;
 use MMSM\Lib\Validators\JWTValidator;
 use Psr\Container\ContainerInterface;
+use Doctrine\ORM\Configuration;
+use Doctrine\ORM\EntityManager;
+use Doctrine\Persistence\Mapping\Driver\MappingDriver;
+use Doctrine\Persistence\Mapping\Driver\StaticPHPDriver;
 use function DI\env;
 
 return [
@@ -55,4 +59,30 @@ return [
         }
         return $authMiddleware;
     },
+    MappingDriver::class => function(ContainerInterface $container){
+        return new StaticPHPDriver($container->get('database.entity.paths'));
+    }
+    ,
+    Configuration::class => function(ContainerInterface $container, MappingDriver $mappingDriver){
+        $appMode = $container->get('environment');
+        $config = new Configuration();
+
+        //$cache = new \Doctrine\Common\Cache\ArrayCache;
+        $config->setMetadataDriverImpl($mappingDriver);
+        $config->setProxyDir($container->get('database.proxies.dir'));
+        $config->setProxyNamespace($container->get('database.proxies.namespace'));
+
+        if(str_contains($appMode, "dev")){
+            $config->setAutoGenerateProxyClasses(true);
+        }else{
+            $config->setAutoGenerateProxyClasses(false);
+        }
+        return $config;
+    },
+
+    EntityManager::class => function(ContainerInterface $container, Configuration $configuration){
+        return EntityManager::create([
+            'url' => $container->get('database.connection.url')
+        ], $configuration);
+    }
 ];
