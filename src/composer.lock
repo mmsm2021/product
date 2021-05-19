@@ -1627,16 +1627,16 @@
         },
         {
             "name": "mmsm/service-lib",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mmsm2021/service-lib.git",
-                "reference": "c994e0a4ffd9e4c757a50534bc4f8a5777210a18"
+                "reference": "c74e03a2879451a8f449a01e696c1cab4961bdc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mmsm2021/service-lib/zipball/c994e0a4ffd9e4c757a50534bc4f8a5777210a18",
-                "reference": "c994e0a4ffd9e4c757a50534bc4f8a5777210a18",
+                "url": "https://api.github.com/repos/mmsm2021/service-lib/zipball/c74e03a2879451a8f449a01e696c1cab4961bdc0",
+                "reference": "c74e03a2879451a8f449a01e696c1cab4961bdc0",
                 "shasum": ""
             },
             "require": {
@@ -1665,10 +1665,10 @@
             ],
             "description": "Service Library",
             "support": {
-                "source": "https://github.com/mmsm2021/service-lib/tree/1.0.1",
+                "source": "https://github.com/mmsm2021/service-lib/tree/1.1.0",
                 "issues": "https://github.com/mmsm2021/service-lib/issues"
             },
-            "time": "2021-05-18T11:46:04+00:00"
+            "time": "2021-05-19T11:58:56+00:00"
         },
         {
             "name": "nikic/fast-route",

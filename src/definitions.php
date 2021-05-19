@@ -2,6 +2,8 @@
 
 use App\Exceptions\DefinitionException;
 use MMSM\Lib\AuthorizationMiddleware;
+use MMSM\Lib\Parsers\JsonBodyParser;
+use MMSM\Lib\Parsers\XmlBodyParser;
 use MMSM\Lib\Validators\JWKValidator;
 use MMSM\Lib\Validators\JWTValidator;
 use Psr\Container\ContainerInterface;
@@ -9,6 +11,7 @@ use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\Mapping\Driver\MappingDriver;
 use Doctrine\Persistence\Mapping\Driver\StaticPHPDriver;
+use Slim\Middleware\BodyParsingMiddleware;
 use function DI\env;
 
 return [
@@ -79,10 +82,15 @@ return [
         }
         return $config;
     },
-
-    EntityManager::class => function(ContainerInterface $container, Configuration $configuration){
+    EntityManager::class => function(ContainerInterface $container, Configuration $configuration) {
         return EntityManager::create([
             'url' => $container->get('database.connection.url')
         ], $configuration);
-    }
+    },
+    BodyParsingMiddleware::class => function(JsonBodyParser $jsonBodyParser, XmlBodyParser $xmlBodyParser) {
+        return new BodyParsingMiddleware([
+            'application/json' => $jsonBodyParser,
+            'application/xml' => $xmlBodyParser,
+        ]);
+    },
 ];
