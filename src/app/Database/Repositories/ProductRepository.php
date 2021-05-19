@@ -16,7 +16,7 @@ class ProductRepository{
 
 
     public function getById($id){
-        $query = $this->entityManager->createQuery('SELECT product FROM App\Database\Entities\Product product WHERE ?1');
+        $query = $this->entityManager->createQuery('SELECT product FROM Pro.duct product WHERE ?1');
         $query->setParameter(1, $id);
         return $query->getResult();
     }
