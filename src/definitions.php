@@ -64,8 +64,7 @@ return [
     },
     MappingDriver::class => function(ContainerInterface $container){
         return new StaticPHPDriver($container->get('database.entity.paths'));
-    }
-    ,
+    },
     Configuration::class => function(ContainerInterface $container, MappingDriver $mappingDriver){
         $appMode = $container->get('environment');
         $config = new Configuration();
