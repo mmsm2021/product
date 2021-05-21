@@ -25,6 +25,8 @@ services:
     postgres:
         image: postgres
         restart: unless-stopped
+        volumes:
+            - ./data:/var/lib/postgresql/data
         environment:
             POSTGRES_USER: phpuser
             POSTGRES_PASSWORD: phppassword
