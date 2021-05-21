@@ -35,8 +35,6 @@ class Add {
     
     public function __invoke(Request $request, Response $response)
     {
-        $existed = false;
-
         try {
             $product = Product::fromArray($request->getParsedBody());
             $product = $this->productRepository->save($product);
