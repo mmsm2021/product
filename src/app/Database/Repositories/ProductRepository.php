@@ -59,9 +59,14 @@ class ProductRepository{
      * @return Product
      * @throws EntityNotFoundException
      */
-    public function getById(string $id): Product
+    public function getById(string $id, bool $excludeDeleted=true): Product
     {
-        $query = $this->entityManager->createQuery('SELECT p FROM ' . Product::class . ' p WHERE p.id = ?1 AND p.deletedAt IS NULL');
+        $dql = 'SELECT p FROM ' . Product::class . ' p WHERE p.id = ?1';
+        if($excludeDeleted){
+            $dql .= ' AND p.deletedAt IS NULL';
+        }
+        
+        $query = $this->entityManager->createQuery($dql);
         $query->setParameter(1, $id);
         $results = $query->getResult();
         if (empty($results)) {
@@ -72,18 +77,18 @@ class ProductRepository{
 
      /**
      * @param string $id
-     * @return Product[]
+     * @return array $products
      * @throws EntityNotFoundException
      */
-    public function getByLocationId(string $locationId): Product
+    public function getByLocationId(string $locationId): array
     {
-        $query = $this->entityManager->createQuery('SELECT p FROM ' . Product::class . ' p WHERE p.location_id = ?1 AND p.deletedAt IS NULL');
+        $query = $this->entityManager->createQuery('SELECT p FROM ' . Product::class . ' p WHERE p.locationId = ?1 AND p.deletedAt IS NULL');
         $query->setParameter(1, $locationId);
         $results = $query->getResult();
         if (empty($results)) {
-            throw new EntityNotFoundException('Failed to find Product by id: "' . $locationId . '".');
+            throw new EntityNotFoundException('Failed to find Product by Location id: "' . $locationId . '".');
         }
-        return $results[array_keys($results)[0]];
+        return $results;
     }
 
 
@@ -107,7 +112,7 @@ class ProductRepository{
     }
 
      /**
-     * @param Log $log
+     * @param Product $product
      * @param bool $deep
      * @throws DeleteException
      */
@@ -115,8 +120,8 @@ class ProductRepository{
     {
         try {
             if ($hard) {
-                $this->getEntityManager->remove($product);
-                $this->getEntityManager->flush();
+                $this->entityManager->remove($product);
+                $this->entityManager->flush();
                 return;
             }
             $this->markEntityAsDeleted($product);
