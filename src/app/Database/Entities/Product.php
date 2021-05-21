@@ -363,7 +363,9 @@ class Product implements EntityInterface
         $entity->setName($product[static::PROPERTY_NAME]);
         $entity->setLocationId($product[static::PROPERTY_LOCATION_ID]);
         $entity->setPrice($product[static::PROPERTY_PRICE]);
-        $entity->setDiscountPrice($product[static::PROPERTY_DISCOUNT_PRICE]);
+        if($product[static::PROPERTY_DISCOUNT_PRICE] !== null){
+            $entity->setDiscountPrice($product[static::PROPERTY_DISCOUNT_PRICE]);
+        }        
         if ($product[static::PROPERTY_DISCOUNT_FROM] !== null) {
             $entity->setDiscountFrom(DateTimeImmutable::createFromFormat(
                 \DateTimeInterface::ISO8601,

@@ -37,7 +37,6 @@ class Read {
                     JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT
                 )
             );
-            $response->withBody()
             return $response;
         } catch (Throwable $e) {
             try {

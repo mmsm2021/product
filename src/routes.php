@@ -14,7 +14,8 @@ $bodyMiddleware = $container->get(\Slim\Middleware\BodyParsingMiddleware::class)
 
 $app->group('/api/v1', function(RouteCollectorProxy $group) use ($authMiddleware, $bodyMiddleware) {
     $group->post('/products', Add::class)
-        ->add($authMiddleware)
+        #->add($authMiddleware)
         ->add($bodyMiddleware);
-    $group->get('/products/{productId}', Read::class);
+    $group->get('/product/{productId}', Read::class);
+    $group->get('/products/{locationId}', Read::class);
 });

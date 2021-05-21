@@ -11,8 +11,13 @@ use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\Mapping\Driver\MappingDriver;
 use Doctrine\Persistence\Mapping\Driver\StaticPHPDriver;
+use MMSM\Lib\Factories\JsonResponseFactory;
 use Slim\Middleware\BodyParsingMiddleware;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\Psr7\Factory\ResponseFactory;
+
 use function DI\env;
+use function DI\create;
 
 return [
     'environment' => env('ENV', 'development'),
@@ -92,4 +97,5 @@ return [
             'application/xml' => $xmlBodyParser,
         ]);
     },
+    ResponseFactoryInterface::class => create(ResponseFactory::class),
 ];
