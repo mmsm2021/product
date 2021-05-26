@@ -65,7 +65,7 @@ class ProductRepository{
         if($excludeDeleted){
             $dql .= ' AND p.deletedAt IS NULL';
         }
-        
+
         $query = $this->entityManager->createQuery($dql);
         $query->setParameter(1, $id);
         $results = $query->getResult();

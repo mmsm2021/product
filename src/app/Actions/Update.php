@@ -13,7 +13,7 @@ use MMSM\Lib\Factories\JsonResponseFactory;
 use \Throwable;
 
 
-class Add {
+class Update {
 
     private ProductRepository $productRepository;
     private JsonResponseFactory $jsonResponseFactory;
@@ -32,10 +32,44 @@ class Add {
     * @return Response
     */
     
-    public function __invoke(Request $request, Response $response)
+    public function __invoke(Request $request, Response $response, string $productId)
     {
         try {
-            $product = Product::fromArray($request->getParsedBody());
+            $product = $this->productRepository->getById($productId);
+            $changes = $request->getParsedBody();
+
+            foreach($changes as $key => $value){
+                switch($key){
+                    case "name":
+                        $product->setName($value); 
+                        break;
+                    case "price":
+                        $product->setPrice($value); 
+                        break;
+                    case "discountPrice":
+                        $product->setDiscountPrice($value); 
+                        break;
+                    case "discountFrom":
+                        $product->setDiscountFrom($value);
+                        break;
+                    case "discountTo":
+                        $product->setDiscountTo($value);
+                        break;
+                    case "status":
+                        $product->setStatus($value);
+                        break;
+                    case "attributes":
+                        $product->setAttributes($value);
+                        break;
+                    case "description":
+                        $product->setDescription($value);
+                        break;
+                    default:
+                        throw "fejl";
+                        break;
+                }
+            }
+            
             $product = $this->productRepository->save($product);
             return $this->jsonResponseFactory->create(200, $product->toArray());
         } catch (Throwable $e) {
