@@ -11,19 +11,14 @@ use App\Actions\Update;
 /** @var \Psr\Container\ContainerInterface $container */
 $app->addRoutingMiddleware();
 $app->addErrorMiddleware(true, true, true);
-
+$app->add($container->get(\Slim\Middleware\BodyParsingMiddleware::class));
 $authMiddleware = $container->get(\MMSM\Lib\AuthorizationMiddleware::class);
-$bodyMiddleware = $container->get(\Slim\Middleware\BodyParsingMiddleware::class);
 
-$app->group('/api/v1', function(RouteCollectorProxy $group) use ($authMiddleware, $bodyMiddleware) {
-    $group->post('/product', Add::class)
-        ->add($bodyMiddleware);
-    $group->patch('/product/{productId}', Update::class)
-        ->add($bodyMiddleware);
-    $group->get('/product/{productId}', Read::class);
-    $group->get('/products/{locationId}', ReadByLocation::class);
-    $group->delete('/product/{productId}', Delete::class)
+$app->group('/api/v1', function(RouteCollectorProxy $group) use ($authMiddleware) {
+    $group->post('/products', Add::class);
+    $group->patch('/products/{productId}', Update::class);
+    $group->get('/products/{productId}', Read::class);
+    //$group->get('/products/{locationId}', ReadByLocation::class);
+    $group->delete('/products/{productId}', Delete::class)
         ->add($authMiddleware);
-    
-    
 });
