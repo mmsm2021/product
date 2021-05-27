@@ -49,5 +49,4 @@ RUN chmod -R a+x /entrypoint.sh.d && \
     rm -f /usr/local/bin/composer
 
 EXPOSE 80
-ENTRYPOINT /entrypoint.sh
-CMD php-fpm && nginx -g "daemon off;"
+CMD php-fpm && sh /entrypoint.sh && nginx -g "daemon off;"
