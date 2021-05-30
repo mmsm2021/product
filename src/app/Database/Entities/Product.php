@@ -4,7 +4,6 @@ namespace App\Database\Entities;
 
 use DateTimeImmutable;
 use Ramsey\Uuid\Uuid;
-use Respect\Validation\Validator as v;
 use App\Database\EntityInterface;
 use App\Database\Repositories\ProductRepository;
 use Doctrine\DBAL\Types\Types;
@@ -13,17 +12,6 @@ use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 
 class Product implements EntityInterface
 {
-    public const PROPERTY_NAME = 'name';
-    public const PROPERTY_LOCATION_ID = 'locationId';
-    public const PROPERTY_PRICE = 'price';
-    public const PROPERTY_DISCOUNT_PRICE = 'discountPrice';
-    public const PROPERTY_DISCOUNT_FROM = 'discountFrom';
-    public const PROPERTY_DISCOUNT_TO = 'discountTo';
-    public const PROPERTY_STATUS = 'status';
-    public const PROPERTY_ATTRIBUTES = 'attributes';
-    public const PROPERTY_DESCRIPTION = 'description';
-    public const PROPERTY_UNIQUE_IDENTIFIER = 'uniqueIdentifier';
-
     public const STATUS_DISABLED = 0;
     public const STATUS_ENABLED = 1;
 
@@ -73,9 +61,9 @@ class Product implements EntityInterface
     private array $attributes = [];
 
     /**
-     * @var string
+     * @var string|null
      */
-    private string $description = '';
+    private ?string $description = null;
 
     /**
      * @var string
@@ -243,17 +231,17 @@ class Product implements EntityInterface
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getDescription(): string
+    public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
+     * @param string|null $description
      */
-    public function setDescription(string $description): void
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
     }
@@ -305,16 +293,16 @@ class Product implements EntityInterface
     {
         $array = [
             'id' => $this->getId(),
-            static::PROPERTY_NAME => $this->getName(),
-            static::PROPERTY_LOCATION_ID => $this->getLocationId(),
-            static::PROPERTY_PRICE => $this->getPrice(),
-            static::PROPERTY_DISCOUNT_PRICE => $this->getDiscountPrice(),
-            static::PROPERTY_DISCOUNT_FROM => $this->getDiscountFrom(),
-            static::PROPERTY_DISCOUNT_TO => $this->getDiscountTo(),
-            static::PROPERTY_STATUS => $this->getStatus(),
-            static::PROPERTY_ATTRIBUTES => $this->getAttributes(),
-            static::PROPERTY_DESCRIPTION => $this->getDescription(),
-            static::PROPERTY_UNIQUE_IDENTIFIER => $this->getUniqueIdentifier(),
+            'name' => $this->getName(),
+            'locationId' => $this->getLocationId(),
+            'price' => $this->getPrice(),
+            'discountPrice' => $this->getDiscountPrice(),
+            'discountFrom' => $this->getDiscountFrom(),
+            'discountTo' => $this->getDiscountTo(),
+            'status' => $this->getStatus(),
+            'attributes' => $this->getAttributes(),
+            'description' => $this->getDescription(),
+            'uniqueIdentifier' => $this->getUniqueIdentifier(),
             'createdAt' => $this->getCreatedAt()->format(\DateTimeInterface::ISO8601),
             'updatedAt' => null,
             'deletedAt' => null,
@@ -329,62 +317,8 @@ class Product implements EntityInterface
     }
 
     /**
-     * @param array $product
-     * @return Product
+     * @param ClassMetadata $metadata
      */
-    public static function fromArray(array $product): Product
-    {
-        v::arrayType()
-            ->notEmpty()
-            ->key(static::PROPERTY_NAME, v::stringType()->notEmpty(), true)
-            ->key(static::PROPERTY_LOCATION_ID, v::stringType()->notEmpty()->uuid(4), true)
-            ->key(static::PROPERTY_PRICE, v::stringType()->numericVal(), true)
-            ->key(static::PROPERTY_DISCOUNT_PRICE, v::oneOf(
-                v::nullType(),
-                v::stringType()->numericVal()
-            ), true)
-            ->key(static::PROPERTY_DISCOUNT_FROM, v::oneOf(
-                v::nullType(),
-                v::stringType()->dateTime(\DateTimeInterface::ISO8601)
-            ), true)
-            ->key(static::PROPERTY_DISCOUNT_TO, v::oneOf(
-                v::nullType(),
-                v::stringType()->dateTime(\DateTimeInterface::ISO8601)
-            ), true)
-            ->key(static::PROPERTY_STATUS, v::oneOf(
-                v::intType()->equals(static::STATUS_ENABLED),
-                v::intType()->equals(static::STATUS_DISABLED)
-            ), true)
-            ->key(static::PROPERTY_ATTRIBUTES, v::arrayType(), true)
-            ->key(static::PROPERTY_DESCRIPTION, v::stringType(), true)
-            ->key(static::PROPERTY_UNIQUE_IDENTIFIER, v::stringType()->notEmpty(), true)
-            ->check($product);
-        $entity = new self;
-        $entity->setName($product[static::PROPERTY_NAME]);
-        $entity->setLocationId($product[static::PROPERTY_LOCATION_ID]);
-        $entity->setPrice($product[static::PROPERTY_PRICE]);
-        if($product[static::PROPERTY_DISCOUNT_PRICE] !== null){
-            $entity->setDiscountPrice($product[static::PROPERTY_DISCOUNT_PRICE]);
-        }        
-        if ($product[static::PROPERTY_DISCOUNT_FROM] !== null) {
-            $entity->setDiscountFrom(DateTimeImmutable::createFromFormat(
-                \DateTimeInterface::ISO8601,
-                $product[static::PROPERTY_DISCOUNT_FROM]
-            ));
-        }
-        if ($product[static::PROPERTY_DISCOUNT_TO] !== null) {
-            $entity->setDiscountTo(DateTimeImmutable::createFromFormat(
-                \DateTimeInterface::ISO8601,
-                $product[static::PROPERTY_DISCOUNT_TO]
-            ));
-        }
-        $entity->setStatus($product[static::PROPERTY_STATUS]);
-        $entity->setAttributes($product[static::PROPERTY_ATTRIBUTES]);
-        $entity->setDescription($product[static::PROPERTY_DESCRIPTION]);
-        $entity->setUniqueIdentifier($product[static::PROPERTY_UNIQUE_IDENTIFIER]);
-        return $entity;
-    }
-
     public static function loadMetadata(ClassMetadata $metadata)
     {
         $builder = new ClassMetadataBuilder($metadata);

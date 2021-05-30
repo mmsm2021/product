@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Actions;
+namespace App\Actions\Product;
 
 use App\Database\Entities\Product;
 use App\Database\Repositories\ProductRepository;
@@ -15,13 +15,20 @@ use \Throwable;
 
 class Update {
 
+    /**
+     * @var ProductRepository
+     */
     private ProductRepository $productRepository;
+
+    /**
+     * @var JsonResponseFactory
+     */
     private JsonResponseFactory $jsonResponseFactory;
     
     public function __construct(
         ProductRepository $productRepository,
         JsonResponseFactory $jsonResponseFactory
-    ){
+    ) {
         $this->productRepository = $productRepository;
         $this->jsonResponseFactory = $jsonResponseFactory;
     }
@@ -31,7 +38,6 @@ class Update {
     * @param Response $response
     * @return Response
     */
-    
     public function __invoke(Request $request, Response $response, string $productId)
     {
         try {
@@ -63,9 +69,6 @@ class Update {
                         break;
                     case "description":
                         $product->setDescription($value);
-                        break;
-                    default:
-                        throw "fejl";
                         break;
                 }
             }

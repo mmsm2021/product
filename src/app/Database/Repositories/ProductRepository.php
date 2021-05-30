@@ -56,16 +56,16 @@ class ProductRepository{
 
     /**
      * @param string $id
+     * @param bool $includeDeleted
      * @return Product
      * @throws EntityNotFoundException
      */
-    public function getById(string $id, bool $excludeDeleted=true): Product
+    public function getById(string $id, bool $includeDeleted = false): Product
     {
         $dql = 'SELECT p FROM ' . Product::class . ' p WHERE p.id = ?1';
-        if($excludeDeleted){
+        if(!$includeDeleted){
             $dql .= ' AND p.deletedAt IS NULL';
         }
-
         $query = $this->entityManager->createQuery($dql);
         $query->setParameter(1, $id);
         $results = $query->getResult();
@@ -95,7 +95,7 @@ class ProductRepository{
     /**
      * @param Product $product
      * @return Product
-     * @throws EntityNotSavedException
+     * @throws SaveException
      */
     public function save(Product $product) : Product
     {
@@ -111,9 +111,9 @@ class ProductRepository{
         }
     }
 
-     /**
+    /**
      * @param Product $product
-     * @param bool $deep
+     * @param bool $hard
      * @throws DeleteException
      */
     public function delete(Product $product, bool $hard = false)
