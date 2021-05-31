@@ -15,8 +15,6 @@ use Slim\Routing\RouteCollectorProxy;
  *     @OA\SecurityScheme(
  *         securityScheme="jwtauth",
  *         type="http",
- *         name="Authorization",
- *         in="header",
  *         scheme="bearer",
  *         bearerFormat="JWT"
  *     )
