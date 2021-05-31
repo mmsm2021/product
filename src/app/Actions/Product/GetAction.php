@@ -9,9 +9,7 @@ use MMSM\Lib\Authorizer;
 use MMSM\Lib\Factories\JsonResponseFactory;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Slim\Exception\HttpInternalServerErrorException;
 use Slim\Exception\HttpNotFoundException;
-use \Throwable;
 
 class GetAction
 {
@@ -47,6 +45,36 @@ class GetAction
     }
 
     /**
+     * @OA\Get(
+     *     path="/api/v1/products/{id}",
+     *     summary="Returns a JSON object of a product",
+     *     tags={"Product"},
+     *     security={{ "bearerAuth":{} }},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The id of the product.",
+     *         required=true,
+     *         @OA\Schema(
+     *             ref="#/components/schemas/uuid"
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Will reply with the product in JSON format",
+     *         @OA\JsonContent(ref="#/components/schemas/Product")
+     *     ),
+     *     @OA\Response(
+     *         response=404,
+     *         description="will contain a JSON object with a message.",
+     *         @OA\JsonContent(ref="#/components/schemas/error")
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="will contain a JSON object with a message.",
+     *         @OA\JsonContent(ref="#/components/schemas/error")
+     *     )
+     * )
      * @param Request $request
      * @param string $id
      * @return Response
@@ -89,11 +117,5 @@ class GetAction
                 $entityNotFoundException
             );
         }
-    }
-
-    protected function isAuthorized(Request $request, string $locationId): bool
-    {
-        $appMetadata = $this->authorizer->getAppMetadata($request, true);
-
     }
 }

@@ -14,11 +14,9 @@ use Slim\Exception\HttpBadRequestException;
 use Slim\Exception\HttpInternalServerErrorException;
 use MMSM\Lib\Factories\JsonResponseFactory;
 use Slim\Exception\HttpUnauthorizedException;
-use \Throwable;
 
 class PostAction
 {
-
     /**
      * @var ProductRepository
      */
@@ -59,9 +57,40 @@ class PostAction
     }
 
     /**
+     * @OA\Post(
+     *     path="/api/v1/products",
+     *     summary="Creates new product from carried JSON",
+     *     tags={"Product"},
+     *     security={{ "bearerAuth":{} }},
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="The Product that you want to create.",
+     *         @OA\JsonContent(ref="#/components/schemas/CreateProductDTO"),
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Will reply with the created products in JSON format",
+     *         @OA\JsonContent(ref="#/components/schemas/Product")
+     *     ),
+     *     @OA\Response(
+     *         response=400,
+     *         description="will contain a JSON object with a message.",
+     *         @OA\JsonContent(ref="#/components/schemas/error")
+     *     ),
+     *     @OA\Response(
+     *         response=401,
+     *         description="will contain a JSON object with a message.",
+     *         @OA\JsonContent(ref="#/components/schemas/error")
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="will contain a JSON object with a message.",
+     *         @OA\JsonContent(ref="#/components/schemas/error")
+     *     )
+     * )
      * @param Request $request
      * @return Response
-     * @throws HttpInternalServerErrorException|HttpBadRequestException
+     * @throws HttpInternalServerErrorException|HttpBadRequestException|HttpUnauthorizedException
      */
     public function __invoke(
         Request $request

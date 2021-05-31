@@ -26,6 +26,71 @@ class ProductValidator
     private ?Validatable $postValidator = null;
 
     /**
+     * @OA\Schema(
+     *     schema="CreateProductDTO",
+     *     type="object",
+     *     @OA\Property(
+     *         property="name",
+     *         type="string",
+     *         minLength=4,
+     *         maxLength=200,
+     *         nullable=false
+     *     ),
+     *     @OA\Property(
+     *         property="locationId",
+     *         ref="#/components/schemas/uuid",
+     *         nullable=false
+     *     ),
+     *     @OA\Property(
+     *         property="price",
+     *         type="string",
+     *         format="number",
+     *         minLength=1,
+     *         maxLength=50,
+     *         nullable=false
+     *     ),
+     *     @OA\Property(
+     *         property="discountPrice",
+     *         type="string",
+     *         format="number",
+     *         minLength=1,
+     *         maxLength=50,
+     *         nullable=true
+     *     ),
+     *     @OA\Property(
+     *         property="discountFrom",
+     *         ref="#/components/schemas/timestamp",
+     *         nullable=true
+     *     ),
+     *     @OA\Property(
+     *         property="discountTo",
+     *         ref="#/components/schemas/timestamp",
+     *         nullable=true
+     *     ),
+     *     @OA\Property(
+     *         property="status",
+     *         type="integer",
+     *         nullable=false,
+     *         description="Enabled=1, Disabled=0"
+     *     ),
+     *     @OA\Property(
+     *         property="attributes",
+     *         ref="#/components/schemas/FreeForm",
+     *         nullable=false
+     *     ),
+     *     @OA\Property(
+     *         property="description",
+     *         type="string",
+     *         nullable=true
+     *     ),
+     *     @OA\Property(
+     *         property="uniqueIdentifier",
+     *         type="string",
+     *         nullable=false,
+     *         minLength=4,
+     *         maxLength=254
+     *     )
+     * )
      * @return Validatable
      */
     public function getPostValidator(): Validatable
@@ -33,7 +98,7 @@ class ProductValidator
         if (!($this->postValidator instanceof Validatable)) {
             $this->postValidator = v::arrayType()
                 ->notEmpty()
-                ->key(static::PROPERTY_NAME, v::stringType()->notEmpty(), true)
+                ->key(static::PROPERTY_NAME, v::stringType()->notEmpty()->length(4,200), true)
                 ->key(static::PROPERTY_LOCATION_ID, v::stringType()->notEmpty()->uuid(4), true)
                 ->key(static::PROPERTY_PRICE, v::stringType()->numericVal(), true)
                 ->key(static::PROPERTY_DISCOUNT_PRICE, v::oneOf(

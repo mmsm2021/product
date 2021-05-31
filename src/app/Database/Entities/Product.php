@@ -10,6 +10,15 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\Builder\ClassMetadataBuilder;
 
+/**
+ * Class Product
+ * @package App\Database\Entities
+ * @OA\Schema(
+ *   schema="Product",
+ *   type="object",
+ *   description="Product object",
+ * )
+ */
 class Product implements EntityInterface
 {
     public const STATUS_DISABLED = 0;
@@ -17,71 +26,88 @@ class Product implements EntityInterface
 
     /**
      * @var string
+     * @OA\Property(ref="#/components/schemas/uuid")
      */
     private string $id;
 
     /**
      * @var string
+     * @OA\Property()
      */
     private string $name;
 
     /**
      * @var string
+     * @OA\Property(ref="#/components/schemas/uuid")
      */
     private string $locationId;
 
     /**
      * @var string
+     * @OA\Property(
+     *     type="string",
+     *     format="number"
+     * )
      */
     private string $price;
 
     /**
      * @var string|null
+     * @OA\Property()
      */
     private ?string $discountPrice = null;
 
     /**
      * @var DateTimeImmutable|null
+     * @OA\Property(ref="#/components/schemas/timestamp")
      */
     private ?DateTimeImmutable $discountFrom = null;
 
     /**
      * @var DateTimeImmutable|null
+     * @OA\Property(ref="#/components/schemas/timestamp")
      */
     private ?DateTimeImmutable $discountTo = null;
 
     /**
      * @var int
+     * @OA\Property()
      */
     private int $status = self::STATUS_DISABLED;
 
     /**
      * @var array
+     * @OA\Property(ref="#/components/schemas/FreeForm")
      */
     private array $attributes = [];
 
     /**
      * @var string|null
+     * @OA\Property()
      */
     private ?string $description = null;
 
     /**
      * @var string
+     * @OA\Property()
      */
     private string $uniqueIdentifier;
 
     /**
      * @var DateTimeImmutable
+     * @OA\Property(ref="#/components/schemas/timestamp")
      */
     private DateTimeImmutable $createdAt;
 
     /**
      * @var DateTimeImmutable|null
+     * @OA\Property(ref="#/components/schemas/timestamp")
      */
     private ?DateTimeImmutable $updatedAt = null;
 
     /**
      * @var DateTimeImmutable|null
+     * @OA\Property(ref="#/components/schemas/timestamp")
      */
     private ?DateTimeImmutable $deletedAt = null;
 

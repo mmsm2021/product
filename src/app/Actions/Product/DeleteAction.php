@@ -15,7 +15,6 @@ use Slim\Exception\HttpUnauthorizedException;
 
 class DeleteAction
 {
-
     /**
      * @var ProductRepository
      */
@@ -48,12 +47,55 @@ class DeleteAction
     }
 
     /**
+     * @OA\Delete(
+     *     path="/api/v1/products/{id}",
+     *     summary="Delete af given product by id.",
+     *     tags={"Product"},
+     *     security={{ "bearerAuth":{} }},
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The id of the product.",
+     *         required=true,
+     *         @OA\Schema(
+     *             ref="#/components/schemas/uuid"
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="hard",
+     *         in="query",
+     *         description="Determines if it is a hard or soft delete.",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="boolean",
+     *             default=false
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=204,
+     *         description="Will reply with an empty body if successful.",
+     *     ),
+     *     @OA\Response(
+     *         response=403,
+     *         description="will contain a JSON object with a message.",
+     *         @OA\JsonContent(ref="#/components/schemas/error")
+     *     ),
+     *     @OA\Response(
+     *         response=410,
+     *         description="will contain a JSON object with a message happends if the entity could not be found by the given id.",
+     *         @OA\JsonContent(ref="#/components/schemas/error")
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="will contain a JSON object with a message.",
+     *         @OA\JsonContent(ref="#/components/schemas/error")
+     *     )
+     * )
      * @param Request $request
      * @param string $id
      * @return Response
      * @throws HttpInternalServerErrorException
      */
-    
     public function __invoke(
         Request $request,
         string $id

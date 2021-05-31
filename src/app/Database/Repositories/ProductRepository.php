@@ -6,9 +6,14 @@ use App\Database\Entities\Product;
 use App\Exceptions\EntityNotFoundException;
 use App\Exceptions\SaveException;
 use App\Exceptions\DeleteException;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Query\QueryException;
+use ReflectionProperty;
 
-class ProductRepository{
+class ProductRepository
+{
 
     public const TABLE_NAME = 'products';
 
@@ -17,17 +22,15 @@ class ProductRepository{
      */
     private EntityManager $entityManager;
 
-
-    
     /**
      * @var ReflectionProperty
      */
-    private \ReflectionProperty $updatedProperty;
+    private ReflectionProperty $updatedProperty;
 
      /**
      * @var ReflectionProperty
      */
-    private \ReflectionProperty $deletedProperty;
+    private ReflectionProperty $deletedProperty;
 
     /**
      * ProductRepository constructor.
@@ -36,8 +39,16 @@ class ProductRepository{
     public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->updatedProperty = new \ReflectionProperty(Product::class, 'updatedAt');
-        $this->deletedProperty = new \ReflectionProperty(Product::class, 'deletedAt');
+        $this->updatedProperty = new ReflectionProperty(Product::class, 'updatedAt');
+        $this->deletedProperty = new ReflectionProperty(Product::class, 'deletedAt');
+    }
+
+    /**
+     * @return EntityManager
+     */
+    public function getEntityManager(): EntityManager
+    {
+        return $this->entityManager;
     }
 
     /**
@@ -91,6 +102,34 @@ class ProductRepository{
         return $results;
     }
 
+    /**
+     * @param Criteria|null $criteria
+     * @param bool $asArrays
+     * @return ArrayCollection
+     */
+    public function getList(?Criteria $criteria = null, bool $asArrays = false): ArrayCollection
+    {
+        $collection = new ArrayCollection;
+        try {
+            $qb = $this->getEntityManager()->createQueryBuilder();
+            $qb->select('u')
+                ->from(Product::class, 'u');
+            if ($criteria !== null) {
+                $qb->addCriteria($criteria);
+            }
+            $result = $qb->getQuery()->getResult();
+            if (!is_array($result)) {
+                $result = [];
+            }
+            foreach ($result as $item) {
+                /** @var Product $item */
+                $collection->add(($asArrays ? $item->toArray() : $item));
+            }
+            return $collection;
+        } catch (QueryException $exception) {
+            return $collection;
+        }
+    }
 
     /**
      * @param Product $product
@@ -151,7 +190,6 @@ class ProductRepository{
         $this->deletedProperty->setValue($product, new \DateTimeImmutable('now'));
         $this->deletedProperty->setAccessible(false);
     }
-
 
      /**
      * @param Product $product

@@ -4,38 +4,56 @@ namespace App\Actions\Product;
 
 use App\Database\Entities\Product;
 use App\Database\Repositories\ProductRepository;
+use Doctrine\Common\Collections\Criteria;
+use MMSM\Lib\Authorizer;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpInternalServerErrorException;
 use MMSM\Lib\Factories\JsonResponseFactory;
 use \Throwable;
 
-class ReadByLocation {
+class ListAction
+{
 
+    /**
+     * @var ProductRepository
+     */
     private ProductRepository $productRepository;
 
+    /**
+     * @var JsonResponseFactory
+     */
     private JsonResponseFactory $jsonResponseFactory;
+
+    /**
+     * @var Authorizer
+     */
+    private Authorizer $authorizer;
 
     /**
      * Read constructor.
      * @param ProductRepository $productRepository
+     * @param JsonResponseFactory $jsonResponseFactory
+     * @param Authorizer $authorizer
      */
-    public function __construct(ProductRepository $productRepository, JsonResponseFactory $jsonResponseFactory)
-    {
+    public function __construct(
+        ProductRepository $productRepository,
+        JsonResponseFactory $jsonResponseFactory,
+        Authorizer $authorizer
+    ) {
         $this->productRepository = $productRepository;
         $this->jsonResponseFactory = $jsonResponseFactory;
+        $this->authorizer = $authorizer;
     }
 
     /**
      * @param Request $request
-     * @param Response $response
-     * @param string $locationId
      * @return Response
      * @throws HttpInternalServerErrorException
      */
-    public function __invoke(Request $request, Response $response, string $locationId): Response
+    public function __invoke(Request $request): Response
     {
-        try {
+        /*try {
             $products = [];
             foreach($this->productRepository->getByLocationId($locationId) as $product) {
                 $products[] = $product->toArray();
@@ -51,6 +69,17 @@ class ReadByLocation {
             } catch (Throwable $exception) {
                 throw new HttpInternalServerErrorException($request, 'An Error occurred.', $exception);
             }
-        }
+        }*/
+    }
+
+    /**
+     * @param Request $request
+     * @return Criteria
+     */
+    protected function getCriteriaFromQuery(Request $request): Criteria
+    {
+        $query = $request->getQueryParams();
+        $criteria = Criteria::create();
+
     }
 }
