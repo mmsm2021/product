@@ -49,7 +49,7 @@ class GetAction
      *     path="/api/v1/products/{id}",
      *     summary="Returns a JSON object of a product",
      *     tags={"Product"},
-     *     security={{ "bearerAuth":{} }},
+     *     security={{ "jwtauth":{} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

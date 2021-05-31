@@ -61,7 +61,7 @@ class PostAction
      *     path="/api/v1/products",
      *     summary="Creates new product from carried JSON",
      *     tags={"Product"},
-     *     security={{ "bearerAuth":{} }},
+     *     security={{ "jwtauth":{} }},
      *     @OA\RequestBody(
      *         required=true,
      *         description="The Product that you want to create.",

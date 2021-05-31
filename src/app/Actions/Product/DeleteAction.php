@@ -51,7 +51,7 @@ class DeleteAction
      *     path="/api/v1/products/{id}",
      *     summary="Delete af given product by id.",
      *     tags={"Product"},
-     *     security={{ "bearerAuth":{} }},
+     *     security={{ "jwtauth":{} }},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",

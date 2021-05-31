@@ -13,7 +13,7 @@ use Slim\Routing\RouteCollectorProxy;
 /**
  * @OA\Components(
  *     @OA\SecurityScheme(
- *         securityScheme="bearerAuth",
+ *         securityScheme="jwtauth",
  *         type="http",
  *         name="Authorization",
  *         in="header",
