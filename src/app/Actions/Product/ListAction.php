@@ -1462,6 +1462,26 @@ class ListAction
      *             type="string"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="size",
+     *         in="query",
+     *         description="Max amount of returned Products.",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *             default=20
+     *         )
+     *     ),
+     *     @OA\Parameter(
+     *         name="offset",
+     *         in="query",
+     *         description="The amount to offset the result set with.",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="string",
+     *             default=0
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Will reply with a list of products in JSON objects.",
