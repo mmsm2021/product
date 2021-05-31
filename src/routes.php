@@ -2,6 +2,7 @@
 
 use App\Actions\Product\DeleteAction;
 use App\Actions\Product\GetAction;
+use App\Actions\Product\ListAction;
 use App\Actions\Product\PostAction;
 use Slim\Psr7\Factory\ResponseFactory;
 use Slim\Routing\RouteCollectorProxy;
@@ -23,20 +24,20 @@ use Slim\Routing\RouteCollectorProxy;
 
 /**
  * @OA\Schema(
- *   schema="uuid",
- *   type="string",
- *   format="uuid",
- *   description="Universally unique identifier 128-bits"
+ *     schema="uuid",
+ *     type="string",
+ *     format="uuid",
+ *     description="Universally unique identifier 128-bits"
  * )
  */
 
 /**
  * @OA\Schema(
- *   schema="jwt",
- *   type="string",
- *   format="jwt",
- *   description="A JSON Web Token",
- *   default="Bearer {id-token}"
+ *     schema="jwt",
+ *     type="string",
+ *     format="jwt",
+ *     description="A JSON Web Token",
+ *     default="Bearer {id-token}"
  * )
  */
 
@@ -51,23 +52,36 @@ use Slim\Routing\RouteCollectorProxy;
 
 /**
  * @OA\Schema(
- *   schema="timestamp",
- *   type="string",
- *   format="timestamp",
- *   description="ISO-8806 timestamp format in PHP: Y-m-d\TH:i:sO"
+ *     schema="timestamp",
+ *     type="string",
+ *     format="timestamp",
+ *     description="ISO-8806 timestamp format in PHP: Y-m-d\TH:i:sO"
  * )
  */
 
 /**
  * @OA\Schema(
- *   schema="error",
- *   type="object",
- *   @OA\Property(property="error", type="boolean"),
- *   @OA\Property(
- *     property="message",
+ *     schema="error",
+ *     type="object",
+ *     @OA\Property(
+ *         property="error",
+ *         type="boolean"
+ *     ),
+ *     @OA\Property(
+ *         property="message",
+ *         type="array",
+ *         @OA\Items(type="string")
+ *     )
+ * )
+ */
+
+/**
+ * @OA\Schema(
+ *     schema="ProductList",
  *     type="array",
- *     @OA\Items(type="string")
- *   )
+ *     @OA\Items(
+ *         ref="#/components/schemas/Product"
+ *     )
  * )
  */
 
@@ -83,6 +97,7 @@ $app->options('{routes:.+}', function (ResponseFactory $responseFactory) {
 });
 
 $app->group('/api/v1', function(RouteCollectorProxy $group) {
+    $group->get('/products', ListAction::class);
     $group->get('/products/{id}', GetAction::class);
     $group->post('/products', PostAction::class);
     $group->delete('/products/{id}', DeleteAction::class);

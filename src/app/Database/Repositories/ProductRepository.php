@@ -86,22 +86,6 @@ class ProductRepository
         return $results[array_keys($results)[0]];
     }
 
-     /**
-     * @param string $id
-     * @return array $products
-     * @throws EntityNotFoundException
-     */
-    public function getByLocationId(string $locationId): array
-    {
-        $query = $this->entityManager->createQuery('SELECT p FROM ' . Product::class . ' p WHERE p.locationId = ?1 AND p.deletedAt IS NULL');
-        $query->setParameter(1, $locationId);
-        $results = $query->getResult();
-        if (empty($results)) {
-            throw new EntityNotFoundException('Failed to find Product by Location id: "' . $locationId . '".');
-        }
-        return $results;
-    }
-
     /**
      * @param Criteria|null $criteria
      * @param bool $asArrays
