@@ -9,6 +9,7 @@ use Doctrine\Persistence\Mapping\Driver\StaticPHPDriver;
 use function DI\env;
 
 return [
+    'root.dir' => __DIR__,
     'database.connection.url' => env('DB_URI'),
     'database.entity.paths' => [
         __DIR__ . '/app/Database/Entities/',
