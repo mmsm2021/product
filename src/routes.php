@@ -5,6 +5,7 @@ use App\Actions\Product\GetAction;
 use App\Actions\Product\ListAction;
 use App\Actions\Product\PatchAction;
 use App\Actions\Product\PostAction;
+use App\Actions\Product\Quote\GetAction as GetQuoteAction;
 use Slim\Psr7\Factory\ResponseFactory;
 use Slim\Routing\RouteCollectorProxy;
 
@@ -103,4 +104,5 @@ $app->group('/api/v1', function(RouteCollectorProxy $group) {
     $group->post('/products', PostAction::class);
     $group->delete('/products/{id}', DeleteAction::class);
     $group->patch('/products/{id}', PatchAction::class);
+    $group->get('/products/quote/{id}', GetQuoteAction::class);
 });
