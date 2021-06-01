@@ -3,6 +3,7 @@
 use App\Actions\Product\DeleteAction;
 use App\Actions\Product\GetAction;
 use App\Actions\Product\ListAction;
+use App\Actions\Product\PatchAction;
 use App\Actions\Product\PostAction;
 use Slim\Psr7\Factory\ResponseFactory;
 use Slim\Routing\RouteCollectorProxy;
@@ -101,9 +102,5 @@ $app->group('/api/v1', function(RouteCollectorProxy $group) {
     $group->get('/products/{id}', GetAction::class);
     $group->post('/products', PostAction::class);
     $group->delete('/products/{id}', DeleteAction::class);
-    //$group->post('/products', Add::class);
-    //$group->patch('/products/{productId}', Update::class);
-    //$group->get('/products/{productId}', Read::class);
-    //$group->get('/products/{locationId}', ReadByLocation::class);
-    //$group->delete('/products/{productId}', Delete::class)->add($authMiddleware);
+    $group->patch('/products/{id}', PatchAction::class);
 });

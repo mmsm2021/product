@@ -76,7 +76,7 @@ class ListAction
      *         in="query",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/uuid"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -85,43 +85,7 @@ class ListAction
      *         required=false,
      *         description="Equals operation.",
      *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="id[gt]",
-     *         in="query",
-     *         description="Geater Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="id[lt]",
-     *         in="query",
-     *         description="Less Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="id[gte]",
-     *         in="query",
-     *         description="Geater Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="id[lte]",
-     *         in="query",
-     *         description="Less Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/uuid"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -130,7 +94,7 @@ class ListAction
      *         description="Not Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/uuid"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -196,42 +160,6 @@ class ListAction
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="name[gt]",
-     *         in="query",
-     *         description="Geater Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="name[lt]",
-     *         in="query",
-     *         description="Less Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="name[gte]",
-     *         in="query",
-     *         description="Geater Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="name[lte]",
-     *         in="query",
-     *         description="Less Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
      *         name="name[neq]",
      *         in="query",
      *         description="Not Equals operation.",
@@ -285,12 +213,12 @@ class ListAction
      *             type="string"
      *         )
      *     ),
-     *          *     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="locationId",
      *         in="query",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/uuid"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -299,43 +227,7 @@ class ListAction
      *         required=false,
      *         description="Equals operation.",
      *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="locationId[gt]",
-     *         in="query",
-     *         description="Geater Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="locationId[lt]",
-     *         in="query",
-     *         description="Less Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="locationId[gte]",
-     *         in="query",
-     *         description="Geater Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="locationId[lte]",
-     *         in="query",
-     *         description="Less Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/uuid"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -344,7 +236,7 @@ class ListAction
      *         description="Not Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/uuid"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -392,7 +284,7 @@ class ListAction
      *             type="string"
      *         )
      *     ),
-     *          *     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="price",
      *         in="query",
      *         required=false,
@@ -473,33 +365,6 @@ class ListAction
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="price[contains]",
-     *         in="query",
-     *         description="String Contains operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="price[startswith]",
-     *         in="query",
-     *         description="String Starts With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="price[endswith]",
-     *         in="query",
-     *         description="String Ends With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *          *     @OA\Parameter(
      *         name="discountPrice",
      *         in="query",
      *         required=false,
@@ -580,38 +445,11 @@ class ListAction
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="discountPrice[contains]",
-     *         in="query",
-     *         description="String Contains operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountPrice[startswith]",
-     *         in="query",
-     *         description="String Starts With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountPrice[endswith]",
-     *         in="query",
-     *         description="String Ends With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *          *     @OA\Parameter(
      *         name="discountFrom",
      *         in="query",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -620,7 +458,7 @@ class ListAction
      *         required=false,
      *         description="Equals operation.",
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -629,7 +467,7 @@ class ListAction
      *         description="Geater Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -638,7 +476,7 @@ class ListAction
      *         description="Less Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -647,7 +485,7 @@ class ListAction
      *         description="Geater Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -656,7 +494,7 @@ class ListAction
      *         description="Less Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -665,60 +503,15 @@ class ListAction
      *         description="Not Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="discountFrom[in]",
-     *         in="query",
-     *         description="IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountFrom[notin]",
-     *         in="query",
-     *         description="NOT IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountFrom[contains]",
-     *         in="query",
-     *         description="String Contains operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountFrom[startswith]",
-     *         in="query",
-     *         description="String Starts With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountFrom[endswith]",
-     *         in="query",
-     *         description="String Ends With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *          *     @OA\Parameter(
      *         name="discountTo",
      *         in="query",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -727,7 +520,7 @@ class ListAction
      *         required=false,
      *         description="Equals operation.",
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -736,7 +529,7 @@ class ListAction
      *         description="Geater Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -745,7 +538,7 @@ class ListAction
      *         description="Less Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -754,7 +547,7 @@ class ListAction
      *         description="Geater Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -763,7 +556,7 @@ class ListAction
      *         description="Less Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -772,55 +565,10 @@ class ListAction
      *         description="Not Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="discountTo[in]",
-     *         in="query",
-     *         description="IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountTo[notin]",
-     *         in="query",
-     *         description="NOT IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountTo[contains]",
-     *         in="query",
-     *         description="String Contains operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountTo[startswith]",
-     *         in="query",
-     *         description="String Starts With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="discountTo[endswith]",
-     *         in="query",
-     *         description="String Ends With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *          *     @OA\Parameter(
      *         name="status",
      *         in="query",
      *         required=false,
@@ -829,105 +577,6 @@ class ListAction
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="status[eq]",
-     *         in="query",
-     *         required=false,
-     *         description="Equals operation.",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[gt]",
-     *         in="query",
-     *         description="Geater Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[lt]",
-     *         in="query",
-     *         description="Less Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[gte]",
-     *         in="query",
-     *         description="Geater Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[lte]",
-     *         in="query",
-     *         description="Less Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[neq]",
-     *         in="query",
-     *         description="Not Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[in]",
-     *         in="query",
-     *         description="IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[notin]",
-     *         in="query",
-     *         description="NOT IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[contains]",
-     *         in="query",
-     *         description="String Contains operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[startswith]",
-     *         in="query",
-     *         description="String Starts With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="status[endswith]",
-     *         in="query",
-     *         description="String Ends With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *          *     @OA\Parameter(
      *         name="description",
      *         in="query",
      *         required=false,
@@ -945,63 +594,9 @@ class ListAction
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="description[gt]",
-     *         in="query",
-     *         description="Geater Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="description[lt]",
-     *         in="query",
-     *         description="Less Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="description[gte]",
-     *         in="query",
-     *         description="Geater Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="description[lte]",
-     *         in="query",
-     *         description="Less Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
      *         name="description[neq]",
      *         in="query",
      *         description="Not Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="description[in]",
-     *         in="query",
-     *         description="IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="description[notin]",
-     *         in="query",
-     *         description="NOT IN operation. Comma seperated list.",
      *         required=false,
      *         @OA\Schema(
      *             type="string"
@@ -1034,7 +629,7 @@ class ListAction
      *             type="string"
      *         )
      *     ),
-     *          *     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="uniqueIdentifier",
      *         in="query",
      *         required=false,
@@ -1047,42 +642,6 @@ class ListAction
      *         in="query",
      *         required=false,
      *         description="Equals operation.",
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="uniqueIdentifier[gt]",
-     *         in="query",
-     *         description="Geater Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="uniqueIdentifier[lt]",
-     *         in="query",
-     *         description="Less Than operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="uniqueIdentifier[gte]",
-     *         in="query",
-     *         description="Geater Than or Equals operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="uniqueIdentifier[lte]",
-     *         in="query",
-     *         description="Less Than or Equals operation.",
-     *         required=false,
      *         @OA\Schema(
      *             type="string"
      *         )
@@ -1141,12 +700,12 @@ class ListAction
      *             type="string"
      *         )
      *     ),
-     *          *     @OA\Parameter(
+     *     @OA\Parameter(
      *         name="createdAt",
      *         in="query",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1155,7 +714,7 @@ class ListAction
      *         required=false,
      *         description="Equals operation.",
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1164,7 +723,7 @@ class ListAction
      *         description="Geater Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1173,7 +732,7 @@ class ListAction
      *         description="Less Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1182,7 +741,7 @@ class ListAction
      *         description="Geater Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1191,7 +750,7 @@ class ListAction
      *         description="Less Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1200,60 +759,15 @@ class ListAction
      *         description="Not Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="createdAt[in]",
-     *         in="query",
-     *         description="IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="createdAt[notin]",
-     *         in="query",
-     *         description="NOT IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="createdAt[contains]",
-     *         in="query",
-     *         description="String Contains operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="createdAt[startswith]",
-     *         in="query",
-     *         description="String Starts With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="createdAt[endswith]",
-     *         in="query",
-     *         description="String Ends With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *          *     @OA\Parameter(
      *         name="updatedAt",
      *         in="query",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1262,7 +776,7 @@ class ListAction
      *         required=false,
      *         description="Equals operation.",
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1271,7 +785,7 @@ class ListAction
      *         description="Geater Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1280,7 +794,7 @@ class ListAction
      *         description="Less Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1289,7 +803,7 @@ class ListAction
      *         description="Geater Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1298,7 +812,7 @@ class ListAction
      *         description="Less Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1307,60 +821,15 @@ class ListAction
      *         description="Not Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
-     *         name="updatedAt[in]",
-     *         in="query",
-     *         description="IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="updatedAt[notin]",
-     *         in="query",
-     *         description="NOT IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="updatedAt[contains]",
-     *         in="query",
-     *         description="String Contains operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="updatedAt[startswith]",
-     *         in="query",
-     *         description="String Starts With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="updatedAt[endswith]",
-     *         in="query",
-     *         description="String Ends With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *          *     @OA\Parameter(
      *         name="deletedAt",
      *         in="query",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1369,7 +838,7 @@ class ListAction
      *         required=false,
      *         description="Equals operation.",
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1378,7 +847,7 @@ class ListAction
      *         description="Geater Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1387,7 +856,7 @@ class ListAction
      *         description="Less Than operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1396,7 +865,7 @@ class ListAction
      *         description="Geater Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1405,7 +874,7 @@ class ListAction
      *         description="Less Than or Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1414,52 +883,7 @@ class ListAction
      *         description="Not Equals operation.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="deletedAt[in]",
-     *         in="query",
-     *         description="IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="deletedAt[notin]",
-     *         in="query",
-     *         description="NOT IN operation. Comma seperated list.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="deletedAt[contains]",
-     *         in="query",
-     *         description="String Contains operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="deletedAt[startswith]",
-     *         in="query",
-     *         description="String Starts With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
-     *         )
-     *     ),
-     *     @OA\Parameter(
-     *         name="deletedAt[endswith]",
-     *         in="query",
-     *         description="String Ends With operation.",
-     *         required=false,
-     *         @OA\Schema(
-     *             type="string"
+     *             ref="#/components/schemas/timestamp"
      *         )
      *     ),
      *     @OA\Parameter(
@@ -1478,7 +902,7 @@ class ListAction
      *         description="The amount to offset the result set with.",
      *         required=false,
      *         @OA\Schema(
-     *             type="string",
+     *             type="number",
      *             default=0
      *         )
      *     ),
@@ -1556,6 +980,11 @@ class ListAction
                     $and
                 );
             }
+            $this->handleAnd(
+                $criteria,
+                Criteria::expr()->isNull('deletedAt'),
+                $and
+            );
         }
         if (!isset($query['size']) ||
             !is_numeric($query['size']) ||
