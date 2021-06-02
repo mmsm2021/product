@@ -11,6 +11,7 @@ use MMSM\Lib\JwtHandler;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Exception\HttpNotFoundException;
+use Respect\Validation\Validator as v;
 
 class GetAction
 {
@@ -77,6 +78,17 @@ class GetAction
      *             ref="#/components/schemas/uuid"
      *         )
      *     ),
+     *     @OA\Parameter(
+     *         name="qty",
+     *         in="query",
+     *         description="The amount of the product you want to order.",
+     *         required=false,
+     *         @OA\Schema(
+     *             type="number",
+     *             minimum=1,
+     *             default=1
+     *         )
+     *     ),
      *     @OA\Response(
      *         response=200,
      *         description="Will reply with a quote for the product.",
@@ -102,6 +114,13 @@ class GetAction
         string $id
     ): Response {
         try {
+            $query = $request->getQueryParams();
+            $qty = 1;
+            if (v::arrayType()->notEmpty()->key('qty', v::numericVal()->notEmpty())->validate($query) &&
+                intval($query['qty']) >= 1
+            ) {
+                $qty = intval($query['qty']);
+            }
             $isSuperAdmin = $this->authorizer->hasRole($request, 'user.roles.super', false);
             $product = $this->productRepository->getById($id, $isSuperAdmin);
             if ($product->getStatus() != Product::STATUS_ENABLED) {
@@ -130,7 +149,9 @@ class GetAction
             }
             return $this->jsonResponseFactory->create(200, [
                 'token' => $this->jwtHandler->create([
-                    'product' => $productArray
+                    'product' => $productArray,
+                    'qty' => $qty,
+                    'totalPrice' => bcmul((string)$productArray['price'], (string)$qty),
                 ], strtotime('+15 minutes'))
             ]);
         } catch (EntityNotFoundException $exception) {
