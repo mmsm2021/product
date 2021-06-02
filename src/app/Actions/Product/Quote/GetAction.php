@@ -128,7 +128,7 @@ class GetAction
             ) {
                 $productArray['price'] = $product->getDiscountPrice();
             }
-            $this->jsonResponseFactory->create(200, [
+            return $this->jsonResponseFactory->create(200, [
                 'token' => $this->jwtHandler->create([
                     'product' => $productArray
                 ], strtotime('+15 minutes'))
