@@ -124,7 +124,7 @@ class ProductValidator
                 ), true)
                 ->key('attributes', v::arrayType(), true)
                 ->key('description', v::stringType(), true)
-                ->key('uniqueidentifer', v::stringType()->notEmpty(), true);
+                ->key('uniqueidentifier', v::stringType()->notEmpty(), true);
         }
         return $this->postValidator;
     }
@@ -173,7 +173,7 @@ class ProductValidator
                 ), true),
                 v::key('attributes', v::arrayType(), true),
                 v::key('description', v::stringType(), true),
-                v::key('uniqueidentifer', v::stringType()->notEmpty(), true),
+                v::key('uniqueidentifier', v::stringType()->notEmpty(), true),
             );
         }
         return $this->patchValidator;
