@@ -39,7 +39,7 @@ use Slim\Routing\RouteCollectorProxy;
  *     type="string",
  *     format="jwt",
  *     description="A JSON Web Token",
- *     default="Bearer {id-token}"
+ *     pattern="^[^\.]+\.[^\.]+\.[^\.]+$"
  * )
  */
 

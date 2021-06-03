@@ -60,8 +60,7 @@ class GetAction
      *     type="object",
      *     @OA\Property(
      *         property="token",
-     *         type="string",
-     *         format="jwt"
+     *         ref="#/components/schemas/jwt"
      *     )
      * )
      * @OA\Get(
